@@ -3,9 +3,22 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background=""
+    android:background="@color/somePurple"
     android:context=".MainActivity">
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/welcomeFont"
+        android:text="Welcome"
+        android:textSize="40dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginLeft="100dp"
+        />
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:text="Let's Get Started"/>
 
 
 </LinearLayout>
