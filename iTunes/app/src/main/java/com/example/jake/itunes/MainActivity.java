@@ -32,6 +32,12 @@ public class MainActivity extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_main, menu);
+        String opt1 = "Search";
+        int groupId = Menu.NONE;
+        int itemID = Menu.FIRST;
+        int order = 10;
+        menu.add(groupId, itemID, order, opt1);
+
         return true;
     }
 
