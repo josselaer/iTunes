@@ -35,6 +35,7 @@ public class MainActivity extends ActionBarActivity {
                         .setAction("Action", null).show();
             }
         });
+
     }
 
     @Override
