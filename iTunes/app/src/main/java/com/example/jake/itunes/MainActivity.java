@@ -6,8 +6,13 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.loopj.android.http.JsonHttpResponseHandler;
+
 import org.json.JSONArray;
 import org.json.JSONException;
+import org.json.JSONObject;
+
+import cz.msebera.android.httpclient.Header;
 
 public class MainActivity extends ActionBarActivity {
 
@@ -36,8 +41,8 @@ public class MainActivity extends ActionBarActivity {
             }
         });*/
         //not sure if we need this and "fab" is causing an error
-        tryMusicPreview();
 
+        trySearch();
     }
 
     @Override
@@ -68,26 +73,30 @@ public class MainActivity extends ActionBarActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    public void tryMusicPreview()  {
-        iTunesSearch its = new iTunesSearch("Taylor Swift");
-        its.execute();
-        Log.d(TAG, "after execute");
-        if(its.isThreadDone() == false) {
-            Log.d(TAG, "is thread done " + its.isThreadDone());
-            try {
-                Thread.sleep(2000);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
+    public void trySearch() {
+        iTunesSearch its = new iTunesSearch();
+        its.searchiTunes("Taylor Swift", 0, new JsonHttpResponseHandler() {
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+                String rc = null;
+                JSONArray results = null;
+                try {
+                    rc = response.get("resultCount").toString();
+                    results = response.getJSONArray("results");
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                int resultCount = Integer.parseInt(rc);
+                Log.d(TAG, "resultCount " + resultCount);
+
+                Log.d(TAG, results.toString());
             }
-        }
-        JSONArray response = its.getResults();
-        Log.d(TAG, response.toString());
-        String preview = null;
-        try {
-            preview = response.getJSONObject(0).getString("previewUrl");
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
+
+            public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
+                Log.d(TAG, "Calling onFailure");
+            }
+        });
     }
 
 }

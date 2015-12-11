@@ -11,6 +11,8 @@ public class MusicPlayer {
     private String song;
     private MediaPlayer player;
 
+    //String preview = response.getJSONObject(0).getString("previewUrl");
+
     public MusicPlayer(String song) {
         this.song = song;
         player = new MediaPlayer();
