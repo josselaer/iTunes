@@ -1,27 +1,26 @@
 package com.example.jake.itunes;
 
-import android.graphics.Typeface;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.support.v7.app.ActionBarActivity;
-import android.view.View;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.TextView;
+
+import org.json.JSONArray;
+import org.json.JSONException;
 
 public class MainActivity extends ActionBarActivity {
+
+    private static final String TAG = "MainActivity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main_activity);
 
-        Typeface myTypeface = Typeface.createFromAsset(getAssets(), "Young & Beautiful.tff");
+        /*Typeface myTypeface = Typeface.createFromAsset(getAssets(), "Young & Beautiful.tff");
         TextView myTextView = (TextView) findViewById(R.id.welcomeFont);
-        myTextView.setTypeface(myTypeface);
+        myTextView.setTypeface(myTypeface);*/
 
 
         /*Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -37,6 +36,7 @@ public class MainActivity extends ActionBarActivity {
             }
         });*/
         //not sure if we need this and "fab" is causing an error
+        tryMusicPreview();
 
     }
 
@@ -67,4 +67,27 @@ public class MainActivity extends ActionBarActivity {
 
         return super.onOptionsItemSelected(item);
     }
+
+    public void tryMusicPreview()  {
+        iTunesSearch its = new iTunesSearch("Taylor Swift");
+        its.execute();
+        Log.d(TAG, "after execute");
+        if(its.isThreadDone() == false) {
+            Log.d(TAG, "is thread done " + its.isThreadDone());
+            try {
+                Thread.sleep(2000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+        JSONArray response = its.getResults();
+        Log.d(TAG, response.toString());
+        String preview = null;
+        try {
+            preview = response.getJSONObject(0).getString("previewUrl");
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+    }
+
 }
