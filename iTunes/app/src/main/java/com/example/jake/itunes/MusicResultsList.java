@@ -1,6 +1,11 @@
 package com.example.jake.itunes;
 
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.ColorFilter;
+import android.graphics.LightingColorFilter;
+import android.graphics.PorterDuff;
+import android.graphics.drawable.Drawable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
@@ -26,6 +31,7 @@ public class MusicResultsList extends AppCompatActivity implements View.OnClickL
     private ImageButton heart;
     private Toolbar toolbar;
     private ListView lSongs;
+    //private DBHandler dbHandler;
     private SongAdapter songAdapter;
     public static final String song_Detail = "event";
     private static final String TAG = "MusicResultsList";
@@ -41,16 +47,20 @@ public class MusicResultsList extends AppCompatActivity implements View.OnClickL
         songAdapter = new SongAdapter(this, songs);
         lSongs.setAdapter(songAdapter);
 
-        heart = (ImageButton) findViewById(R.id.heartShape);
-        heart.setOnClickListener(this);
-
 
     }
 
     @Override
     public void onClick(View view) {
+
+    }
+
+    public void favoriteSong(View view) {
+        Drawable heartButton = getResources().getDrawable(R.drawable.ic_action_favorite);
+        ColorFilter filter = new LightingColorFilter(Color.RED, Color. RED);
+        heart = (ImageButton) findViewById(R.id.heartShape);
         if (view == heart) {
-            
+            heartButton.setColorFilter(filter);
         }
     }
 
