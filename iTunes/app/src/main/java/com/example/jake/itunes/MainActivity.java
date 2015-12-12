@@ -1,5 +1,6 @@
 package com.example.jake.itunes;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.Toolbar;
@@ -26,6 +27,7 @@ import cz.msebera.android.httpclient.Header;
 public class MainActivity extends ActionBarActivity implements AdapterView.OnItemSelectedListener {
 
     private static final String TAG = "MainActivity";
+    private static final String EXTRA_MESSAGE = "SendIntent";
     private EditText searchText;
     private Toolbar toolbar;
     private Spinner spinner;
@@ -132,22 +134,22 @@ public class MainActivity extends ActionBarActivity implements AdapterView.OnIte
 
                 if(entity == 1) {
                     final ArrayList<Artist> resultsList = Artist.fromJson(results);
-
-                    for(int i = 0; i < resultsList.size(); i++) {
-                        Log.d(TAG, resultsList.get(i).toString());
-                    }
+                    Intent intent = new Intent(getApplicationContext(), ArtistResultsList.class);
+                    intent.putExtra(EXTRA_MESSAGE, resultsList);
+                    startActivity(intent);
                 }
                 else if(entity == 2) {
                     final ArrayList<Album> resultsList = Album.fromJson(results);
-                    for(int i = 0; i < resultsList.size(); i++) {
-                        Log.d(TAG, resultsList.get(i).toString());
-                    }
+                    Intent intent = new Intent(getApplicationContext(), AlbumResultsList.class);
+                    intent.putExtra(EXTRA_MESSAGE, resultsList);
+                    startActivity(intent);
                 }
                 else {
                     final ArrayList<Song> resultsList = Song.fromJson(results);
-                    for(int i = 0; i < resultsList.size(); i++) {
-                        Log.d(TAG, resultsList.get(i).toString());
-                    }
+                    Intent intent = new Intent(getApplicationContext(), MusicResultsList.class);
+                    intent.putExtra(EXTRA_MESSAGE, resultsList);
+                    startActivity(intent);
+
                 }
 
 
