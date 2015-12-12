@@ -16,7 +16,7 @@
         android:layout_margin="8dp"
         android:layout_toRightOf="@+id/albumCover"
         android:text="Title"
-        android:textSize="25dp"/>
+        android:textSize="18dp"/>
 
     <TextView
         android:id="@+id/songArtist"
@@ -26,7 +26,7 @@
         android:layout_toRightOf="@+id/albumCover"
         android:layout_marginTop="40dp"
         android:text="Artist"
-        android:textSize="16dp"/>
+        android:textSize="14dp"/>
 
     <TextView
         android:id="@+id/songAlbumName"
@@ -44,7 +44,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="E"
-        android:layout_marginLeft="250dp"
+        android:layout_marginLeft="270dp"
         android:layout_marginTop="35dp"
         android:textSize="16dp"
         />
@@ -58,6 +58,17 @@
         android:layout_toRightOf="@+id/explicit"
         android:layout_marginTop="30dp"
         android:layout_marginLeft="7dp"
+        android:onClick="favoriteSong"/>
+
+    <ImageButton
+        android:id="@+id/playback"
+        android:layout_width="40dp"
+        android:layout_height="30dp"
+        android:background="@drawable/ic_action_play"
+        android:backgroundTint="@android:color/black"
+        android:layout_toRightOf="@+id/explicit"
+        android:layout_marginTop="30dp"
+        android:layout_marginLeft="45dp"
         android:onClick="favoriteSong"/>
 
     <!--preview button, how to work it-->
