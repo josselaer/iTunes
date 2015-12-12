@@ -19,6 +19,8 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
+
 import cz.msebera.android.httpclient.Header;
 
 public class MainActivity extends ActionBarActivity implements AdapterView.OnItemSelectedListener {
@@ -127,6 +129,29 @@ public class MainActivity extends ActionBarActivity implements AdapterView.OnIte
                 Log.d(TAG, "resultCount " + resultCount);
 
                 Log.d(TAG, results.toString());
+
+                if(entity == 1) {
+                    final ArrayList<Artist> resultsList = Artist.fromJson(results);
+
+                    for(int i = 0; i < resultsList.size(); i++) {
+                        Log.d(TAG, resultsList.get(i).toString());
+                    }
+                }
+                else if(entity == 2) {
+                    final ArrayList<Album> resultsList = Album.fromJson(results);
+                    for(int i = 0; i < resultsList.size(); i++) {
+                        Log.d(TAG, resultsList.get(i).toString());
+                    }
+                }
+                else {
+                    final ArrayList<Song> resultsList = Song.fromJson(results);
+                    for(int i = 0; i < resultsList.size(); i++) {
+                        Log.d(TAG, resultsList.get(i).toString());
+                    }
+                }
+
+
+
             }
 
             public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
