@@ -1,29 +1,36 @@
 package com.example.jake.itunes;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.EditText;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.EditText;
+import android.widget.RadioButton;
+import android.widget.Spinner;
+import android.widget.Toast;
 
 import com.loopj.android.http.JsonHttpResponseHandler;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-import android.support.v7.widget.Toolbar;
-import android.widget.Toast;
 
 import cz.msebera.android.httpclient.Header;
 
-public class MainActivity extends ActionBarActivity {
+public class MainActivity extends ActionBarActivity implements AdapterView.OnItemSelectedListener {
 
     private static final String TAG = "MainActivity";
     private EditText searchText;
     private Toolbar toolbar;
+    private RadioButton artistButton;
+    private RadioButton albumButton;
+    private int entity;
+
 
     //url goes here to access API
     //public final static String EXTRA_MESSAGE = "";
@@ -35,6 +42,14 @@ public class MainActivity extends ActionBarActivity {
 
         toolbar = (Toolbar) findViewById(R.id.landing_toolbar);
         this.setSupportActionBar(toolbar);
+
+        entity = 0;
+        Spinner spinner = (Spinner) findViewById(R.id.spinner);
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
+                R.array.spinner_array, android.R.layout.simple_spinner_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner.setAdapter(adapter);
+        spinner.setOnItemSelectedListener(this);
 
         //trySearch();
     }
@@ -79,6 +94,8 @@ public class MainActivity extends ActionBarActivity {
 
     public void queryMusic(View something) {
         searchText = (EditText) findViewById(R.id.searchBar);
+
+
         if((searchText.getText().toString().trim().equals(""))) {
             Toast.makeText(getApplicationContext(), "Please enter a word", Toast.LENGTH_SHORT).show();
         }
@@ -86,6 +103,7 @@ public class MainActivity extends ActionBarActivity {
         else {
             //Intent i = new Intent(getApplicationContext(), MusicList.class);
             String query = searchText.getText().toString();
+            trySearch(query);
             //i.putExtra(EXTRA_MESSAGE, query);
             //startActivity(i);
         }
@@ -93,9 +111,9 @@ public class MainActivity extends ActionBarActivity {
     }
 
 
-    public void trySearch() {
+    public void trySearch(String query) {
         iTunesSearch its = new iTunesSearch();
-        its.searchiTunes("Taylor Swift", 0, new JsonHttpResponseHandler() {
+        its.searchiTunes(query, entity, new JsonHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                 String rc = null;
@@ -119,4 +137,23 @@ public class MainActivity extends ActionBarActivity {
         });
     }
 
+    @Override
+    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+        switch(position) {
+            case 0:
+                entity = 0;
+                break;
+            case 1:
+                entity=1;
+                break;
+            case 2:
+                entity=2;
+                break;
+        }
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> parent) {
+        entity = 0;
+    }
 }
