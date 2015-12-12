@@ -68,8 +68,7 @@
         android:backgroundTint="@android:color/black"
         android:layout_toRightOf="@+id/explicit"
         android:layout_marginTop="30dp"
-        android:layout_marginLeft="45dp"
-        android:onClick="favoriteSong"/>
+        android:layout_marginLeft="45dp" />
 
     <!--preview button, how to work it-->
 

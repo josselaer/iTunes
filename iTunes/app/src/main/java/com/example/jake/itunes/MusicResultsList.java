@@ -1,22 +1,23 @@
 package com.example.jake.itunes;
 
 import android.content.Intent;
+<<<<<<< HEAD
 import android.graphics.Color;
 import android.graphics.ColorFilter;
 import android.graphics.LightingColorFilter;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
+=======
+import android.os.Bundle;
+>>>>>>> 8e5c40d59cbcfb9ef06e0e3d78768040dae0e648
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.Menu;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.os.Bundle;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 /**
@@ -29,12 +30,14 @@ public class MusicResultsList extends AppCompatActivity implements View.OnClickL
     private TextView albumName;
     private TextView explicit;
     private ImageButton heart;
+    private ImageButton play;
     private Toolbar toolbar;
     private ListView lSongs;
     //private DBHandler dbHandler;
     private SongAdapter songAdapter;
     public static final String song_Detail = "event";
     private static final String TAG = "MusicResultsList";
+    private boolean isPlaying = false;
 
     @Override
     protected void onCreate (Bundle savedInstanceState) {
@@ -46,7 +49,7 @@ public class MusicResultsList extends AppCompatActivity implements View.OnClickL
         lSongs = (ListView) findViewById(R.id.listResults);
         songAdapter = new SongAdapter(this, songs);
         lSongs.setAdapter(songAdapter);
-
+        
 
     }
 
