@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ArtistResultsList"
+    >
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/landing_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:background="#2A98A7"
+        android:minHeight="60dp"
+        android:elevation="4dp"
+        android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
+        android:popupTheme="@style/ThemeOverlay.AppCompat.Light" >
+    </android.support.v7.widget.Toolbar>
+
+    <ListView
+        android:id="@+id/listResults"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+    </ListView>
+
+    <ProgressBar
+        android:id="@+id/progress"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:max="100"
+        android:indeterminate="true"
+        android:visibility="gone"
+        style="?android:attr/progressBarStyleHorizontal"/>
+
+</LinearLayout>

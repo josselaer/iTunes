@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/albumCover"
+        android:layout_width="56dp"
+        android:layout_height="56dp"
+        android:layout_margin="8dp"/>
+    <TextView
+        android:id="@+id/artistName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:layout_toRightOf="@+id/albumCover"
+        android:text="Artist"
+        android:textSize="25dp"/>
+
+    <TextView
+        android:id="@+id/albumName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Album"
+        android:layout_toRightOf="@+id/albumCover"
+        android:layout_marginLeft="10sp"
+        android:layout_marginTop="40dp"
+        android:textSize="14dp"
+        />
+
+    <TextView
+        android:id="@+id/albumGenre"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Genre"
+        android:layout_toRightOf="@+id/albumCover"
+        android:layout_marginLeft="10sp"
+        android:layout_marginTop="60dp"
+        android:textSize="14dp"
+        />
+
+    <TextView
+        android:id="@+id/explicit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="E"
+        android:layout_marginLeft="250dp"
+        android:layout_marginTop="35dp"
+        android:textSize="16dp"
+        />
+
+
+
+</RelativeLayout>
