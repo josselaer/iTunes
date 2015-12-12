@@ -10,7 +10,6 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
-import android.widget.RadioButton;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -27,8 +26,7 @@ public class MainActivity extends ActionBarActivity implements AdapterView.OnIte
     private static final String TAG = "MainActivity";
     private EditText searchText;
     private Toolbar toolbar;
-    private RadioButton artistButton;
-    private RadioButton albumButton;
+    private Spinner spinner;
     private int entity;
 
 
@@ -44,7 +42,7 @@ public class MainActivity extends ActionBarActivity implements AdapterView.OnIte
         this.setSupportActionBar(toolbar);
 
         entity = 0;
-        Spinner spinner = (Spinner) findViewById(R.id.spinner);
+        spinner = (Spinner) findViewById(R.id.spinner);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
                 R.array.spinner_array, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);

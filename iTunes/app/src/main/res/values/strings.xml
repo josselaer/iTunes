@@ -4,7 +4,7 @@
     <string name="action_favorite">Mark as Favorite</string>
     <string name="fav_list">Favorites List</string>
     <string-array name="spinner_array">
-        <item>Advanced Search</item>
+        <item>Songs Only</item>
         <item>Artists Only</item>
         <item>Albums Only</item>
     </string-array>
