@@ -1,26 +1,64 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/somePurple"
-    tools:context=".MainActivity">
+    tools:context=".MainActivity"
+    >
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/landing_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:background="#2A98A7"
+        android:minHeight="60dp"
+        android:title="iTunes"
+        android:elevation="4dp"
+        android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
+        android:popupTheme="@style/ThemeOverlay.AppCompat.Light" >
+    </android.support.v7.widget.Toolbar>
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/welcomeFont"
-        android:text="Welcome"
+        android:id="@+id/welcome"
+        android:text="iTunes"
         android:textSize="40dp"
-        android:layout_marginTop="30dp"
-        android:layout_marginLeft="100dp"
+        android:gravity="center"
+        android:layout_marginBottom="400dp"
         />
+
+    <EditText
+        android:id="@+id/searchBar"
+        android:layout_width="300dp"
+        android:layout_height="60dp"
+        android:background="@drawable/edittext"
+        android:textColor="@android:color/black"
+        android:textCursorDrawable="@null"
+        android:singleLine="true"
+        android:hint="Search"
+        android:inputType="text"
+        android:padding="10dp"
+        android:layout_marginTop="150dp"
+        android:layout_marginLeft="40dp">
+        <requestFocus/>
+    </EditText>
+
     <Button
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="Let's Get Started"/>
+        android:id="@+id/searchBtn"
+        android:text="Search Now!"
+        android:layout_width="150dp"
+        android:layout_height="50dp"
+        android:background="@drawable/btndesign"
+        android:layout_below="@+id/searchBar"
+        android:layout_marginLeft="120dp"
+        android:layout_marginTop="20dp"/>
 
 
-</LinearLayout>
+
+
+</RelativeLayout>

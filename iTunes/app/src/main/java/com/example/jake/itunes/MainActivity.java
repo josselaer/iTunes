@@ -1,48 +1,42 @@
 package com.example.jake.itunes;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.EditText;
+import android.view.View;
 
 import com.loopj.android.http.JsonHttpResponseHandler;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import android.support.v7.widget.Toolbar;
+import android.widget.Toast;
 
 import cz.msebera.android.httpclient.Header;
 
 public class MainActivity extends ActionBarActivity {
 
     private static final String TAG = "MainActivity";
+    private EditText searchText;
+    private Toolbar toolbar;
+
+    //url goes here to access API
+    //public final static String EXTRA_MESSAGE = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main_activity);
 
-        /*Typeface myTypeface = Typeface.createFromAsset(getAssets(), "Young & Beautiful.tff");
-        TextView myTextView = (TextView) findViewById(R.id.welcomeFont);
-        myTextView.setTypeface(myTypeface);*/
+        toolbar = (Toolbar) findViewById(R.id.landing_toolbar);
+        this.setSupportActionBar(toolbar);
 
-
-        /*Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);*/ //I  think I took out toolbar so there is no reference to it
-
-
-        /*FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });*/
-        //not sure if we need this and "fab" is causing an error
-
-        trySearch();
+        //trySearch();
     }
 
     @Override
@@ -66,12 +60,38 @@ public class MainActivity extends ActionBarActivity {
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+        if (id == R.id.action_search) {
+            //do nothing because on search page
+            return true;
+        }
+        if (id == R.id.access_favorites) {
+            //goToFavList()
             return true;
         }
 
         return super.onOptionsItemSelected(item);
     }
+
+    public void goToFavList() {
+        //Intent intent = new Intent(MainActivity.this, FavoritesList.class);
+        //startActivity(intent);
+    }
+
+    public void queryMusic(View something) {
+        searchText = (EditText) findViewById(R.id.searchBar);
+        if((searchText.getText().toString().trim().equals(""))) {
+            Toast.makeText(getApplicationContext(), "Please enter a word", Toast.LENGTH_SHORT).show();
+        }
+
+        else {
+            //Intent i = new Intent(getApplicationContext(), MusicList.class);
+            String query = searchText.getText().toString();
+            //i.putExtra(EXTRA_MESSAGE, query);
+            //startActivity(i);
+        }
+
+    }
+
 
     public void trySearch() {
         iTunesSearch its = new iTunesSearch();
