@@ -24,6 +24,14 @@
         android:name=".MusicResultsList">
         </activity>
 
+        <activity
+            android:name=".ArtistResultsList">
+        </activity>
+
+        <activity
+            android:name=".AlbumResultsList">
+        </activity>
+
 
 
     </application>
