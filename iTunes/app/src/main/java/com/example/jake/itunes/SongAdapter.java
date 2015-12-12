@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -23,6 +24,7 @@ public class SongAdapter extends ArrayAdapter<Song> {
         public TextView songName;
         public TextView songArtist;
         public TextView albumName;
+        public ImageButton playButton;
 
     }
 
@@ -42,6 +44,9 @@ public class SongAdapter extends ArrayAdapter<Song> {
             viewHolder.songName = (TextView)convertView.findViewById(R.id.songName);
             viewHolder.songArtist = (TextView)convertView.findViewById(R.id.songArtist);
             viewHolder.albumName = (TextView)convertView.findViewById(R.id.songAlbumName);
+            viewHolder.playButton = (ImageButton) convertView.findViewById(R.id.playback);
+
+
             convertView.setTag(viewHolder);
         }
 
@@ -53,6 +58,13 @@ public class SongAdapter extends ArrayAdapter<Song> {
         viewHolder.songArtist.setText(song.getArtistName());
         viewHolder.albumName.setText(song.getCollectionName());
         Picasso.with(getContext()).load(Uri.parse(song.getArtwork())).error(R.drawable.ic_action_favorite).into(viewHolder.cover);
+        viewHolder.playButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                MusicPlayer player = new MusicPlayer(song.getSongPreview());
+                player.playSong();
+            }
+        });
 
         return convertView;
     }
