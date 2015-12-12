@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
+import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -16,7 +17,7 @@ import java.util.ArrayList;
 /**
  * Created by quincyschurr on 12/11/15.
  */
-public class MusicResultsList extends AppCompatActivity{
+public class MusicResultsList extends AppCompatActivity implements View.OnClickListener{
     private ImageView cover;
     private TextView songName;
     private TextView songArtist;
@@ -40,7 +41,17 @@ public class MusicResultsList extends AppCompatActivity{
         songAdapter = new SongAdapter(this, songs);
         lSongs.setAdapter(songAdapter);
 
+        heart = (ImageButton) findViewById(R.id.heartShape);
+        heart.setOnClickListener(this);
 
+
+    }
+
+    @Override
+    public void onClick(View view) {
+        if (view == heart) {
+            
+        }
     }
 
 
