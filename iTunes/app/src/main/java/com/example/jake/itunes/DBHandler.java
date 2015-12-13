@@ -8,6 +8,8 @@ import android.content.ContentValues;
 import android.database.Cursor;
 import android.util.Log;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -16,34 +18,34 @@ import java.util.List;
  */
 public class DBHandler extends SQLiteOpenHelper {
 
-    private static final int DATABASE_VERSION = 1;
-    private static final String DATABASE_NAME = "FaveSongsDB.db";
+    private SQLiteDatabase database;
+    private DBHandler handler;
 
+    private static final int DATABASE_VERSION = 2;
+    private static final String DATABASE_NAME = "FaveSongsDB.db";
 
     private static final String TABLE_SONGS = "favoritedSongs";
 
     public static final String KEY_ID = "_id";
+    public static final String KEY_COVERURL = "coverurl";
     public static final String KEY_NAME = "songnames";
     public static final String KEY_ARTIST = "songartist";
+    public static final String KEY_ALBUM = "songalbum";
 
-    private static final String[] COLUMNS = {KEY_ID, KEY_NAME, KEY_ARTIST};
+    private static final String[] COLUMNS = {KEY_ID, KEY_COVERURL, KEY_NAME, KEY_ARTIST, KEY_ALBUM};
 
 
     public DBHandler(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
 
-
-    /*, String name, SQLiteDatabase.CursorFactory factory,
-                     int version) {
-        super(context, DATABASE_NAME, factory, DATABASE_VERSION);*/
     }
 
     @Override
     public void onCreate(SQLiteDatabase db) {
         String CREATE_FAVE_TABLE =
                 " CREATE TABLE " + TABLE_SONGS + " ("
-                + KEY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
-                + KEY_NAME + " TEXT, " + KEY_ARTIST + " TEXT);";
+                + KEY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " + KEY_COVERURL + " TEXT, "
+                + KEY_NAME + " TEXT, " + KEY_ARTIST + " TEXT, " + KEY_ALBUM + " TEXT);";
 
         db.execSQL(CREATE_FAVE_TABLE);
 
@@ -56,17 +58,29 @@ public class DBHandler extends SQLiteOpenHelper {
 
     }
 
-    public void addSong (Song song) {
+    public void addSong (String url, String name, String artist, String album) {//(Song song) {
         //for logging now
-        Log.d("addSong", song.toString());
 
-        //reference to writable DB
+        //Log.d("addSong", song.toString());
+
+        //reference to writable DB, but not sure it's getting context
         SQLiteDatabase db = this.getWritableDatabase();
 
         //create ContentValues to add key "column"/value
         ContentValues values = new ContentValues();
+
+        values.put(KEY_COVERURL, url);
+        values.put(KEY_NAME, name);
+        values.put(KEY_ARTIST, artist);
+        values.put(KEY_ALBUM, album);
+
+
+        /*values.put(KEY_COVERURL, song.getArtwork());
         values.put(KEY_NAME, song.getTrackName()); //get song name
         values.put(KEY_ARTIST, song.getArtistName()); //get artist
+        values.put(KEY_ALBUM, song.getCollectionName());*/
+        Log.d("Song Name", name);
+        Log.d("Artist Name", artist);
 
         //insert into table
         db.insert(TABLE_SONGS, null, values);
@@ -93,12 +107,13 @@ public class DBHandler extends SQLiteOpenHelper {
         song.getTrackName();
         song.getArtistName();
 
+
         Log.d("getSong("+id+")", song.toString());
 
         return song;
     }
 
-    //don't need an updateSong b/c not changing song attributes
+    //update, i don't think we need an update b/c not changing attributes
 
     public void deleteSong(Song song) {
 
@@ -107,26 +122,11 @@ public class DBHandler extends SQLiteOpenHelper {
         db.close();
 
         Log.d("deleteSong", song.toString());
-        /*boolean result = false;
 
-        String query = "Select * FROM " + TABLE_SONGS + " WHERE " + KEY_NAME + " =  \"" + songName + "\"";
-        SQLiteDatabase db = this. getWritableDatabase();
-        Cursor cursor = db.rawQuery(query, null);
-        Song song = new Song();
-
-        if(cursor.moveToFirst()) {
-            song.setID(Integer.parseInt(cursor.getString(0)));
-            db.delete(TABLE_SONGS, KEY_ID + " = ?", new String[] {String.valueOf(song.getID())});
-            cursor.close();
-            result = true;
-        }*/
-
-        //db.close();
-        //return result;
     }
 
-    public List<Song> getAllSongs() {
-        List<Song> favSongs = new LinkedList<Song>();
+    public ArrayList<Song> getAllSongs() {
+        ArrayList<Song> favSongs = new ArrayList<Song>();
 
         //build query
         String query = "SELECT * FROM " + TABLE_SONGS;
@@ -141,13 +141,16 @@ public class DBHandler extends SQLiteOpenHelper {
             do {
                 song = new Song();
                 song.setID(Integer.parseInt(cursor.getString(0)));
-                song.getTrackName();
-                song.getArtistName();
+                song.setArtwork(cursor.getString(1));
+                song.setTrackName(cursor.getString(2));
+                Log.d("Song - ", song.getTrackName());
+                song.setArtistName(cursor.getString(3));
+                song.setCollectionName(cursor.getString(4));
 
                 favSongs.add(song);
             } while (cursor.moveToNext());
         }
-        Log.d("getAllSongs()", favSongs.toString());
+        Log.d("getAllSongs()", song.getTrackName());
         return favSongs;
     }
 }

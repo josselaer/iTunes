@@ -2,12 +2,13 @@ package com.example.jake.itunes;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
 import android.graphics.ColorFilter;
 import android.graphics.LightingColorFilter;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
-
+import android.content.Context;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -53,36 +54,12 @@ public class MusicResultsList extends AppCompatActivity{
         lSongs.setAdapter(songAdapter);
 
         toolbar = (Toolbar) findViewById(R.id.landing_toolbar);
-        //this.setSupportActionBar(toolbar);
+        this.setSupportActionBar(toolbar);
 
 
 
     }
 
-    public void addSongToFav(View v) {
-        heart = (ImageButton) findViewById(R.id.heartShape);
-        Drawable replaceImg = getResources().getDrawable(R.drawable.ic_action_red_heart);
-        ((ImageButton) v).setEnabled(false);
-        ((ImageButton) v).setBackgroundDrawable(replaceImg);
-
-
-        //set sqlite
-        DBHandler db = new DBHandler(this);
-        //how to add the song to the database, and get the data attached
-        Song song = new Song();
-        //just to get the song name... maybe
-        songName = (TextView) findViewById(R.id.songName);
-        String name = songName.toString();
-        song.setTrackName(name);
-
-        //get song artist same way
-        songArtist = (TextView) findViewById(R.id.songArtist);
-        String artist = songArtist.toString();
-        song.setArtistName(artist);
-        Log.d("Right before we add the actual song", song.toString());
-        db.addSong(song);
-        Log.d("After song has been added", song.toString());
-    }
 
     public void removeSong(View v) {
 

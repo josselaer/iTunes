@@ -51,6 +51,8 @@ public class Song implements Serializable{
 
     public void setID(int id) { this._id = id;}
 
+    public void setArtwork(String artworkName) {artwork = artworkName;}
+
     public String getArtwork() {
         return artwork;
     }
@@ -66,6 +68,8 @@ public class Song implements Serializable{
     public String getArtistName() {
         return artistName;
     }
+
+    public void setCollectionName(String collection) {collectionName = collection;}
 
     public String getCollectionName() {
         return collectionName;

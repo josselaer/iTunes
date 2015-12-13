@@ -12,6 +12,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by quincyschurr on 12/12/15.
@@ -25,8 +26,9 @@ public class FavoritesListView extends AppCompatActivity {
     private ImageButton heart;
     private ImageButton play;
     private Toolbar toolbar;
-    private ListView lSongs;
+    private ListView fSongs;
     private SongAdapter songAdapter;
+
     public static final String song_Detail = "event";
     private static final String TAG = "MusicResultsList";
     private boolean isPlaying = false;
@@ -34,17 +36,19 @@ public class FavoritesListView extends AppCompatActivity {
     @Override
     protected void onCreate (Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Intent intent = getIntent();
-        //need to somehow get the list from Database
-        ArrayList<Song> songs = (ArrayList<Song>) intent.getSerializableExtra("SendIntent");
-        setContentView(R.layout.song_results_list);
 
-        lSongs = (ListView) findViewById(R.id.favoriteResults);
-        songAdapter = new SongAdapter(this, songs);
-        lSongs.setAdapter(songAdapter);
+        setContentView(R.layout.favorites_list_view);
+
+        ArrayList<Song> allFavSongs;
+        DBHandler db = new DBHandler(this);
+        allFavSongs = db.getAllSongs();
+
+        fSongs = (ListView) findViewById(R.id.favoriteResults);
+        songAdapter = new SongAdapter(this, allFavSongs);
+        fSongs.setAdapter(songAdapter);
 
         toolbar = (Toolbar) findViewById(R.id.landing_toolbar);
-        //this.setSupportActionBar(toolbar);
+        this.setSupportActionBar(toolbar);
 
     }
 
