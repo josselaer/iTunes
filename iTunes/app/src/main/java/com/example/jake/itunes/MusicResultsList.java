@@ -1,21 +1,32 @@
 package com.example.jake.itunes;
 
+import android.content.DialogInterface;
 import android.content.Intent;
-import android.os.Bundle;
+import android.graphics.Color;
+import android.graphics.ColorFilter;
+import android.graphics.LightingColorFilter;
+import android.graphics.PorterDuff;
+import android.graphics.drawable.Drawable;
+
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.os.Bundle;
+
 
 import java.util.ArrayList;
 
 /**
  * Created by quincyschurr on 12/11/15.
  */
-public class MusicResultsList extends AppCompatActivity implements View.OnClickListener{
+public class MusicResultsList extends AppCompatActivity{
     private ImageView cover;
     private TextView songName;
     private TextView songArtist;
@@ -34,25 +45,77 @@ public class MusicResultsList extends AppCompatActivity implements View.OnClickL
     protected void onCreate (Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Intent intent = getIntent();
-        ArrayList<Song> songs = (ArrayList<Song>)intent.getSerializableExtra("SendIntent");
+        ArrayList<Song> songs = (ArrayList<Song>) intent.getSerializableExtra("SendIntent");
         setContentView(R.layout.song_results_list);
 
         lSongs = (ListView) findViewById(R.id.listResults);
         songAdapter = new SongAdapter(this, songs);
         lSongs.setAdapter(songAdapter);
 
-        heart = (ImageButton) findViewById(R.id.heartShape);
-        //heart.setOnClickListener(this);
+        toolbar = (Toolbar) findViewById(R.id.landing_toolbar);
+        //this.setSupportActionBar(toolbar);
 
+
+
+    }
+
+    public void addSongToFav(View v) {
+        heart = (ImageButton) findViewById(R.id.heartShape);
+        Drawable replaceImg = getResources().getDrawable(R.drawable.ic_action_red_heart);
+        ((ImageButton) v).setEnabled(false);
+        ((ImageButton) v).setBackgroundDrawable(replaceImg);
+
+
+        //set sqlite
+        DBHandler db = new DBHandler(this);
+        //how to add the song to the database, and get the data attached
+        Song song = new Song();
+        //just to get the song name... maybe
+        songName = (TextView) findViewById(R.id.songName);
+        String name = songName.toString();
+        song.setTrackName(name);
+
+        //get song artist same way
+        songArtist = (TextView) findViewById(R.id.songArtist);
+        String artist = songArtist.toString();
+        song.setArtistName(artist);
+        Log.d("Right before we add the actual song", song.toString());
+        db.addSong(song);
+        Log.d("After song has been added", song.toString());
+    }
+
+    public void removeSong(View v) {
 
     }
 
     @Override
-    public void onClick(View view) {
-        if (view == heart) {
-            
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_favorite, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.action_search:
+                goToSearch();
+                return true;
+            case R.id.access_favorites:
+                accessFavList();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
         }
     }
 
+    public void goToSearch() {
+        Intent i = new Intent(getApplicationContext(), MainActivity.class);
+        startActivity(i);
+    }
+
+    public void accessFavList() {
+        Intent i = new Intent(getApplicationContext(), FavoritesListView.class);
+        startActivity(i);
+    }
 
 }

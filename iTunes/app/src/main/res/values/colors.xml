@@ -4,6 +4,6 @@
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
     <color name="notFavorite">#000000</color>
-    <color name="favorited">#FF0000</color>
+    <color name="favorited">#B00000</color>
     <color name="somePurple">#ccccff</color>
 </resources>

@@ -21,17 +21,25 @@
         </activity>
 
         <activity
-        android:name=".MusicResultsList">
+        android:name=".MusicResultsList"
+            android:label="Songs">
+
         </activity>
 
         <activity
-            android:name=".ArtistResultsList">
+            android:name=".ArtistResultsList"
+            android:label="Artists">
         </activity>
 
         <activity
-            android:name=".AlbumResultsList">
+            android:name=".AlbumResultsList"
+            android:label="Albums">
         </activity>
 
+        <activity
+            android:name=".FavoritesListView"
+            android:label="Favorite Songs">
+        </activity>
 
 
     </application>
