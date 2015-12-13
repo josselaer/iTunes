@@ -3,6 +3,7 @@ package com.example.jake.itunes;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
@@ -24,7 +25,7 @@ import java.util.ArrayList;
 
 import cz.msebera.android.httpclient.Header;
 
-public class MainActivity extends ActionBarActivity implements AdapterView.OnItemSelectedListener {
+public class MainActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
     private static final String TAG = "MainActivity";
     private static final String EXTRA_MESSAGE = "SendIntent";
@@ -59,7 +60,7 @@ public class MainActivity extends ActionBarActivity implements AdapterView.OnIte
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
+        getMenuInflater().inflate(R.menu.menu_favorite, menu);
         String opt1 = "Search";
         int groupId = Menu.NONE;
         int itemID = Menu.FIRST;
