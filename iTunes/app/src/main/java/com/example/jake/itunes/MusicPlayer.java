@@ -13,6 +13,10 @@ public class MusicPlayer {
 
     //String preview = response.getJSONObject(0).getString("previewUrl");
 
+    public MusicPlayer(){
+        player = new MediaPlayer();
+    }
+
     public MusicPlayer(String song) {
         this.song = song;
         player = new MediaPlayer();
@@ -25,6 +29,7 @@ public class MusicPlayer {
     }
 
     public void setupPlayer() {
+        player.reset();
         try {
             player.setDataSource(song);
         } catch (IOException e) {
@@ -42,7 +47,11 @@ public class MusicPlayer {
     }
 
     public void pauseSong() {
-        player.pause();
+        player.stop();
+    }
+
+    public boolean isPlayingSong() {
+        return player.isPlaying();
     }
 
 

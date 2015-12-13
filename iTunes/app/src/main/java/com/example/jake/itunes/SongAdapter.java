@@ -21,6 +21,7 @@ import java.util.ArrayList;
 public class SongAdapter extends ArrayAdapter<Song> {
 
     private static final String TAG = "SongAdapter";
+    private MusicPlayer player;
 
     private static class ViewHolder {
         public ImageView cover;
@@ -38,7 +39,7 @@ public class SongAdapter extends ArrayAdapter<Song> {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         final Song song = getItem(position);
-
+        player = new MusicPlayer();
         ViewHolder viewHolder;
         if(convertView == null) {
             viewHolder = new ViewHolder();
@@ -66,8 +67,13 @@ public class SongAdapter extends ArrayAdapter<Song> {
         viewHolder.playButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                MusicPlayer player = new MusicPlayer(song.getSongPreview());
-                player.playSong();
+                if(player.isPlayingSong() == false) {
+                    player.setSong(song.getSongPreview());
+                    player.playSong();
+                }
+                else {
+                    player.pauseSong();
+                }
             }
         });
 
