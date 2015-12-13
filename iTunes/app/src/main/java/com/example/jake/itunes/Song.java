@@ -54,9 +54,13 @@ public class Song implements Serializable{
         return artwork;
     }
 
+    public void setTrackName(String name) {trackName = name;}
+
     public String getTrackName() {
         return trackName;
     }
+
+    public void setArtistName(String artist) {artistName = artist;}
 
     public String getArtistName() {
         return artistName;

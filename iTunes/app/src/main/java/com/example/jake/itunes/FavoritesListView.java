@@ -44,7 +44,7 @@ public class FavoritesListView extends AppCompatActivity {
         lSongs.setAdapter(songAdapter);
 
         toolbar = (Toolbar) findViewById(R.id.landing_toolbar);
-        this.setSupportActionBar(toolbar);
+        //this.setSupportActionBar(toolbar);
 
     }
 
