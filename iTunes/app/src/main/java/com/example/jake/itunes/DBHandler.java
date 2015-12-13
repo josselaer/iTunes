@@ -79,8 +79,10 @@ public class DBHandler extends SQLiteOpenHelper {
         values.put(KEY_NAME, song.getTrackName()); //get song name
         values.put(KEY_ARTIST, song.getArtistName()); //get artist
         values.put(KEY_ALBUM, song.getCollectionName());*/
+        Log.d("Song url", url);
         Log.d("Song Name", name);
         Log.d("Artist Name", artist);
+        Log.d("Album Name", album);
 
         //insert into table
         db.insert(TABLE_SONGS, null, values);
@@ -108,7 +110,7 @@ public class DBHandler extends SQLiteOpenHelper {
         song.getArtistName();
 
 
-        Log.d("getSong("+id+")", song.toString());
+
 
         return song;
     }
@@ -142,6 +144,7 @@ public class DBHandler extends SQLiteOpenHelper {
                 song = new Song();
                 song.setID(Integer.parseInt(cursor.getString(0)));
                 song.setArtwork(cursor.getString(1));
+
                 song.setTrackName(cursor.getString(2));
                 Log.d("Song - ", song.getTrackName());
                 song.setArtistName(cursor.getString(3));

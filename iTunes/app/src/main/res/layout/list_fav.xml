@@ -4,16 +4,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <ImageView
-        android:id="@+id/albumFavCover"
-        android:layout_width="56dp"
-        android:layout_height="56dp"
-        android:layout_margin="8dp"/>
+
     <TextView
         android:id="@+id/songName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="8dp"
+        android:layout_margin="12dp"
         android:layout_toRightOf="@+id/albumCover"
         android:text="Title"
         android:textSize="18dp"/>
@@ -22,9 +18,9 @@
         android:id="@+id/songArtist"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="10dp"
-        android:layout_toRightOf="@+id/albumCover"
-        android:layout_marginTop="40dp"
+        android:layout_marginLeft="20dp"
+        android:layout_toRightOf="@id/albumCover"
+        android:layout_marginTop="35dp"
         android:text="Artist"
         android:textSize="14dp"/>
 
@@ -34,8 +30,8 @@
         android:layout_height="wrap_content"
         android:text="Album"
         android:layout_toRightOf="@+id/albumCover"
-        android:layout_marginLeft="10sp"
-        android:layout_marginTop="60dp"
+        android:layout_marginLeft="20sp"
+        android:layout_marginTop="55dp"
         android:textSize="14dp"
         />
 
@@ -50,15 +46,6 @@
         />
 
 
-    <ImageButton
-        android:id="@+id/playback"
-        android:layout_width="40dp"
-        android:layout_height="30dp"
-        android:background="@drawable/ic_action_play"
-        android:backgroundTint="@android:color/black"
-        android:layout_toRightOf="@+id/explicit"
-        android:layout_marginTop="30dp"
-        android:layout_marginLeft="45dp" />
 
     <!--preview button, how to work it-->
 

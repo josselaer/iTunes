@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -70,7 +71,8 @@ public class SongAdapter extends ArrayAdapter<Song>{
         viewHolder.songArtist.setText(song.getArtistName());
         viewHolder.albumName.setText(song.getCollectionName());
 
-        final String sUrl = viewHolder.cover.toString();
+        final String sUrl = song.getArtwork();
+        //Log.d("String url for cover", sUrl);
         final String sName = viewHolder.songName.getText().toString();
         final String sArtist = viewHolder.songArtist.getText().toString();
         final String sAlbum = viewHolder.albumName.getText().toString();
@@ -78,7 +80,7 @@ public class SongAdapter extends ArrayAdapter<Song>{
         //final Drawable replaceImg = getResources().getDrawable(R.drawable.ic_action_red_heart);
 
 
-
+        Log.d(TAG, sUrl);
         Picasso.with(getContext()).load(Uri.parse(song.getArtwork())).error(R.drawable.ic_action_favorite).into(viewHolder.cover);
         viewHolder.playButton.setOnClickListener(new View.OnClickListener() {
             @Override
