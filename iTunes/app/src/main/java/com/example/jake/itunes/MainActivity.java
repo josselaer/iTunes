@@ -70,30 +70,27 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         return true;
     }
 
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_search) {
-            //do nothing because on search page
-            return true;
+        switch (item.getItemId()) {
+            case R.id.action_search:
+                //goToSearch(); already on search
+                return true;
+            case R.id.access_favorites:
+                accessFavList();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
         }
-        if (id == R.id.access_favorites) {
-            //goToFavList()
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
     }
 
-    public void goToFavList() {
-        //Intent intent = new Intent(MainActivity.this, FavoritesList.class);
-        //startActivity(intent);
+
+    public void accessFavList() {
+        Intent i = new Intent(getApplicationContext(), FavoritesListView.class);
+        startActivity(i);
     }
+
 
     public void queryMusic(View something) {
         searchText = (EditText) findViewById(R.id.searchBar);
