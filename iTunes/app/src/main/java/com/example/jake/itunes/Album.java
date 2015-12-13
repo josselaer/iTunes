@@ -11,13 +11,14 @@ import java.util.ArrayList;
  * Created by Jake on 12/12/15.
  */
 public class Album implements Serializable {
+    private static final String TAG = "Album";
     /*
-    artistName
-    collectionName
-    artworkUrl60
-    collectionExplicitness
-    primaryGenreName
-     */
+        artistName
+        collectionName
+        artworkUrl60
+        collectionExplicitness
+        primaryGenreName
+         */
     private String artwork;
     private String artistName;
     private String collectionName;
@@ -75,8 +76,7 @@ public class Album implements Serializable {
             isExplicit = jsonObject.getString("collectionExplicitness");
             album.genre = jsonObject.getString("primaryGenreName");
 
-
-            if (isExplicit == "notExplicit") {
+            if (isExplicit.equals("notExplicit")) {
                 album.explicit = false;
             }
             else {

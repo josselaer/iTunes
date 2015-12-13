@@ -1,6 +1,7 @@
 package com.example.jake.itunes;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,12 +20,15 @@ import java.util.ArrayList;
  */
 public class SongAdapter extends ArrayAdapter<Song> {
 
+    private static final String TAG = "SongAdapter";
+
     private static class ViewHolder {
         public ImageView cover;
         public TextView songName;
         public TextView songArtist;
         public TextView albumName;
         public ImageButton playButton;
+        public TextView explicit;
 
     }
 
@@ -45,6 +49,7 @@ public class SongAdapter extends ArrayAdapter<Song> {
             viewHolder.songArtist = (TextView)convertView.findViewById(R.id.songArtist);
             viewHolder.albumName = (TextView)convertView.findViewById(R.id.songAlbumName);
             viewHolder.playButton = (ImageButton) convertView.findViewById(R.id.playback);
+            viewHolder.explicit = (TextView)convertView.findViewById(R.id.explicit);
 
 
             convertView.setTag(viewHolder);
@@ -65,6 +70,13 @@ public class SongAdapter extends ArrayAdapter<Song> {
                 player.playSong();
             }
         });
+
+        if(song.getExplicit() == true) {
+            viewHolder.explicit.setTextColor(Color.RED);
+        }
+        else {
+            viewHolder.explicit.setVisibility(View.INVISIBLE);
+        }
 
         return convertView;
     }

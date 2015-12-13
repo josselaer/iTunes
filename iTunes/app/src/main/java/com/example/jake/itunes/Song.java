@@ -11,14 +11,15 @@ import java.util.ArrayList;
  * Created by Jake on 12/12/15.
  */
 public class Song implements Serializable{
+    private static final String TAG = "Song";
     /*
-    artworkUrl30
-    trackName
-    artistName
-    collectionName
-    trackExplicitness
-    previewUrl
-     */
+        artworkUrl30
+        trackName
+        artistName
+        collectionName
+        trackExplicitness
+        previewUrl
+         */
     private int _id;
     private String artwork;
     private String trackName;
@@ -91,7 +92,7 @@ public class Song implements Serializable{
             song.songPreview = jsonObject.getString("previewUrl");
             song.trackName = jsonObject.getString("trackName");
 
-            if (isExplicit == "notExplicit") {
+            if (isExplicit.equals("notExplicit")) {
                 song.explicit = false;
             }
             else {
