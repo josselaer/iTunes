@@ -22,23 +22,27 @@
 
         <activity
         android:name=".MusicResultsList"
-            android:label="Songs">
+            android:label="Songs"
+            android:theme="@style/AppTheme.NoActionBar">
 
         </activity>
 
         <activity
             android:name=".ArtistResultsList"
-            android:label="Artists">
+            android:label="Artists"
+            android:theme="@style/AppTheme.NoActionBar">
         </activity>
 
         <activity
             android:name=".AlbumResultsList"
-            android:label="Albums">
+            android:label="Albums"
+            android:theme="@style/AppTheme.NoActionBar">
         </activity>
 
         <activity
             android:name=".FavoritesListView"
-            android:label="Favorite Songs">
+            android:label="Favorite Songs"
+            android:theme="@style/AppTheme.NoActionBar">
         </activity>
 
 

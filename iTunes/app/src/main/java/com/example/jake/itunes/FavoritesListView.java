@@ -12,6 +12,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by quincyschurr on 12/12/15.
@@ -34,13 +35,15 @@ public class FavoritesListView extends AppCompatActivity {
     @Override
     protected void onCreate (Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Intent intent = getIntent();
-        //need to somehow get the list from Database
-        ArrayList<Song> songs = (ArrayList<Song>) intent.getSerializableExtra("SendIntent");
+
         setContentView(R.layout.song_results_list);
 
+        ArrayList<Song> allFavSongs;
+        DBHandler db = new DBHandler(this);
+        allFavSongs = db.getAllSongs();
+
         lSongs = (ListView) findViewById(R.id.favoriteResults);
-        songAdapter = new SongAdapter(this, songs);
+        songAdapter = new SongAdapter(this, allFavSongs);
         lSongs.setAdapter(songAdapter);
 
         toolbar = (Toolbar) findViewById(R.id.landing_toolbar);
