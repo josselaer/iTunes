@@ -41,15 +41,34 @@ public class DBHandler extends SQLiteOpenHelper {
 
     }
 
-    /*public void addSong (Song song) {
+    public void addSong (Song song) {
         ContentValues values = new ContentValues();
         //maybe just supposed to store meta data??
-        values.put(COLUMN_NAME, song.getSongName());
-        values.put(COLUMN_ARTIST, song.getArtist());
+        values.put(COLUMN_NAME, song.getTrackName());
+        values.put(COLUMN_ARTIST, song.getArtistName());
 
         SQLiteDatabase db = this.getWritableDatabase();
         db.insert(TABLE_SONGS, null, values);
         db.close();
         
-    }*/
+    }
+
+    public boolean deleteSong(String songName) {
+        boolean result = false;
+
+        String query = "Select * FROM " + TABLE_SONGS + " WHERE " + COLUMN_NAME + " =  \"" + songName + "\"";
+        SQLiteDatabase db = this. getWritableDatabase();
+        Cursor cursor = db.rawQuery(query, null);
+        Song song = new Song();
+
+        if(cursor.moveToFirst()) {
+            song.setID(Integer.parseInt(cursor.getString(0)));
+            db.delete(TABLE_SONGS, COLUMN_ID + " = ?", new String[] {String.valueOf(song.getID())});
+            cursor.close();
+            result = true;
+        }
+
+        db.close();
+        return result;
+    }
 }

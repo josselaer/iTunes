@@ -1,29 +1,31 @@
 package com.example.jake.itunes;
 
+import android.content.DialogInterface;
 import android.content.Intent;
-<<<<<<< HEAD
 import android.graphics.Color;
 import android.graphics.ColorFilter;
 import android.graphics.LightingColorFilter;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
-=======
-import android.os.Bundle;
->>>>>>> 8e5c40d59cbcfb9ef06e0e3d78768040dae0e648
+
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.os.Bundle;
+
 
 import java.util.ArrayList;
 
 /**
  * Created by quincyschurr on 12/11/15.
  */
-public class MusicResultsList extends AppCompatActivity implements View.OnClickListener{
+public class MusicResultsList extends AppCompatActivity{
     private ImageView cover;
     private TextView songName;
     private TextView songArtist;
@@ -33,7 +35,6 @@ public class MusicResultsList extends AppCompatActivity implements View.OnClickL
     private ImageButton play;
     private Toolbar toolbar;
     private ListView lSongs;
-    //private DBHandler dbHandler;
     private SongAdapter songAdapter;
     public static final String song_Detail = "event";
     private static final String TAG = "MusicResultsList";
@@ -43,29 +44,71 @@ public class MusicResultsList extends AppCompatActivity implements View.OnClickL
     protected void onCreate (Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Intent intent = getIntent();
-        ArrayList<Song> songs = (ArrayList<Song>)intent.getSerializableExtra("SendIntent");
+        ArrayList<Song> songs = (ArrayList<Song>) intent.getSerializableExtra("SendIntent");
         setContentView(R.layout.song_results_list);
 
         lSongs = (ListView) findViewById(R.id.listResults);
         songAdapter = new SongAdapter(this, songs);
         lSongs.setAdapter(songAdapter);
-        
+
+        toolbar = (Toolbar) findViewById(R.id.landing_toolbar);
+        this.setSupportActionBar(toolbar);
+
 
     }
 
-    @Override
-    public void onClick(View view) {
-
-    }
-
-    public void favoriteSong(View view) {
-        Drawable heartButton = getResources().getDrawable(R.drawable.ic_action_favorite);
-        ColorFilter filter = new LightingColorFilter(Color.RED, Color. RED);
+    public void addSongToFav(View v) {
         heart = (ImageButton) findViewById(R.id.heartShape);
-        if (view == heart) {
-            heartButton.setColorFilter(filter);
+        Drawable replaceImg = getResources().getDrawable(R.drawable.ic_action_red_heart);
+        ((ImageButton) v).setEnabled(false);
+        ((ImageButton) v).setBackgroundDrawable(replaceImg);
+
+        DBHandler dbHandler = new DBHandler(this, null, null, 1);
+
+        //how to add songs
+        Song song = new Song();
+        dbHandler.addSong(song);
+    }
+
+    public void removeSong(View v) {
+        DBHandler dbHandler = new DBHandler(this, null, null, 1);
+        //how to add songs
+        Song song = new Song();
+        boolean result = dbHandler.deleteSong(song.getTrackName());
+
+        if(result) {
+            //need to change the button color
         }
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_favorite, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.action_search:
+                //goToSearch();
+                return true;
+            case R.id.access_favorites:
+                accessFavList();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
+    public void goToSearch() {
+        Intent i = new Intent(getApplicationContext(), MainActivity.class);
+        startActivity(i);
+    }
+
+    public void accessFavList() {
+        Intent i = new Intent(getApplicationContext(), FavoritesListView.class);
+        startActivity(i);
+    }
 
 }

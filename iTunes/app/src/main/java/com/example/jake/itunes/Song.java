@@ -19,6 +19,7 @@ public class Song implements Serializable{
     trackExplicitness
     previewUrl
      */
+    private int _id;
     private String artwork;
     private String trackName;
     private String artistName;
@@ -47,6 +48,8 @@ public class Song implements Serializable{
         return songs;
     }
 
+    public void setID(int id) { this._id = id;}
+
     public String getArtwork() {
         return artwork;
     }
@@ -66,6 +69,8 @@ public class Song implements Serializable{
     public boolean getExplicit() {
         return explicit;
     }
+
+    public int getID() { return this._id;}
 
     public String getSongPreview() {
         return songPreview;

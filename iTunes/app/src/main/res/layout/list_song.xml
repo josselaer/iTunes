@@ -54,11 +54,10 @@
         android:layout_width="40dp"
         android:layout_height="30dp"
         android:background="@drawable/ic_action_favorite"
-        android:backgroundTint="@android:color/black"
         android:layout_toRightOf="@+id/explicit"
+        android:onClick="addSongToFav"
         android:layout_marginTop="30dp"
-        android:layout_marginLeft="7dp"
-        android:onClick="favoriteSong"/>
+        android:layout_marginLeft="7dp" />
 
     <ImageButton
         android:id="@+id/playback"
