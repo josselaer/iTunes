@@ -60,31 +60,6 @@ public class MusicResultsList extends AppCompatActivity{
 
     }
 
-    public void addSongToFav(View v) {
-        heart = (ImageButton) findViewById(R.id.heartShape);
-        Drawable replaceImg = getResources().getDrawable(R.drawable.ic_action_red_heart);
-        ((ImageButton) v).setEnabled(false);
-        ((ImageButton) v).setBackgroundDrawable(replaceImg);
-
-
-        //set sqlite
-        DBHandler db = new DBHandler(getApplicationContext());
-        //how to add the song to the database, and get the data attached
-        Song song = new Song();
-        //maybe we just pass in the values to the DB
-
-        //just to get the song name... maybe
-        songName = (TextView) findViewById(R.id.songName);
-        String name = songName.toString();
-        song.setTrackName(name);
-
-        //get song artist same way
-        songArtist = (TextView) findViewById(R.id.songArtist);
-        String artist = songArtist.toString();
-        song.setArtistName(artist);
-        //db.addSong(song);
-
-    }
 
     public void removeSong(View v) {
 

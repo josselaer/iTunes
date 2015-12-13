@@ -26,8 +26,9 @@ public class FavoritesListView extends AppCompatActivity {
     private ImageButton heart;
     private ImageButton play;
     private Toolbar toolbar;
-    private ListView lSongs;
+    private ListView fSongs;
     private SongAdapter songAdapter;
+
     public static final String song_Detail = "event";
     private static final String TAG = "MusicResultsList";
     private boolean isPlaying = false;
@@ -36,18 +37,18 @@ public class FavoritesListView extends AppCompatActivity {
     protected void onCreate (Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        setContentView(R.layout.song_results_list);
+        setContentView(R.layout.favorites_list_view);
 
         ArrayList<Song> allFavSongs;
         DBHandler db = new DBHandler(this);
         allFavSongs = db.getAllSongs();
 
-        lSongs = (ListView) findViewById(R.id.favoriteResults);
+        fSongs = (ListView) findViewById(R.id.favoriteResults);
         songAdapter = new SongAdapter(this, allFavSongs);
-        lSongs.setAdapter(songAdapter);
+        fSongs.setAdapter(songAdapter);
 
         toolbar = (Toolbar) findViewById(R.id.landing_toolbar);
-        //this.setSupportActionBar(toolbar);
+        this.setSupportActionBar(toolbar);
 
     }
 
