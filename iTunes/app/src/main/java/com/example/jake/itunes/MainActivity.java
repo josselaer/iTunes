@@ -115,6 +115,8 @@ public class MainActivity extends ActionBarActivity implements AdapterView.OnIte
 
     public void trySearch(String query) {
         iTunesSearch its = new iTunesSearch();
+        SaveSearch ss = new SaveSearch();
+        ss.writeSearch(query, entity);
         its.searchiTunes(query, entity, new JsonHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
