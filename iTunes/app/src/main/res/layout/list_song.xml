@@ -55,7 +55,6 @@
         android:layout_height="30dp"
         android:background="@drawable/ic_action_favorite"
         android:layout_toRightOf="@+id/explicit"
-        android:onClick="addSongToFav"
         android:layout_marginTop="30dp"
         android:layout_marginLeft="7dp" />
 

@@ -21,7 +21,7 @@ public class DBHandler extends SQLiteOpenHelper {
     private SQLiteDatabase database;
     private DBHandler handler;
 
-    private static final int DATABASE_VERSION = 1;
+    private static final int DATABASE_VERSION = 2;
     private static final String DATABASE_NAME = "FaveSongsDB.db";
 
     private static final String TABLE_SONGS = "favoritedSongs";
@@ -58,22 +58,29 @@ public class DBHandler extends SQLiteOpenHelper {
 
     }
 
-    public void addSong (Song song) {
+    public void addSong (String url, String name, String artist, String album) {//(Song song) {
         //for logging now
 
-        Log.d("addSong", song.toString());
+        //Log.d("addSong", song.toString());
 
         //reference to writable DB, but not sure it's getting context
         SQLiteDatabase db = this.getWritableDatabase();
 
         //create ContentValues to add key "column"/value
         ContentValues values = new ContentValues();
-        values.put(KEY_COVERURL, song.getArtwork());
+
+        values.put(KEY_COVERURL, url);
+        values.put(KEY_NAME, name);
+        values.put(KEY_ARTIST, artist);
+        values.put(KEY_ALBUM, album);
+
+
+        /*values.put(KEY_COVERURL, song.getArtwork());
         values.put(KEY_NAME, song.getTrackName()); //get song name
         values.put(KEY_ARTIST, song.getArtistName()); //get artist
-        values.put(KEY_ALBUM, song.getCollectionName());
-        Log.d("Song Name", song.getTrackName());
-        Log.d("Artist Name", song.getArtistName());
+        values.put(KEY_ALBUM, song.getCollectionName());*/
+        Log.d("Song Name", name);
+        Log.d("Artist Name", artist);
 
         //insert into table
         db.insert(TABLE_SONGS, null, values);
@@ -134,15 +141,16 @@ public class DBHandler extends SQLiteOpenHelper {
             do {
                 song = new Song();
                 song.setID(Integer.parseInt(cursor.getString(0)));
-                song.getArtwork();
-                song.getTrackName();
-                song.getArtistName();
-                song.getCollectionName();
+                song.setArtwork(cursor.getString(1));
+                song.setTrackName(cursor.getString(2));
+                Log.d("Song - ", song.getTrackName());
+                song.setArtistName(cursor.getString(3));
+                song.setCollectionName(cursor.getString(4));
 
                 favSongs.add(song);
             } while (cursor.moveToNext());
         }
-        Log.d("getAllSongs()", favSongs.toString());
+        Log.d("getAllSongs()", song.getTrackName());
         return favSongs;
     }
 }
