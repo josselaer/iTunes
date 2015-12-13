@@ -24,6 +24,8 @@ public class SongAdapter extends ArrayAdapter<Song>{
     private static final String TAG = "SongAdapter";
     private MusicPlayer player;
     private DBHandler handler;
+    private ArrayList<String> favSongNames;
+
 
     private static class ViewHolder {
         public ImageView cover;
@@ -36,7 +38,10 @@ public class SongAdapter extends ArrayAdapter<Song>{
 
     }
 
-    public SongAdapter(Context context, ArrayList<Song> aSongs) { super(context, 0, aSongs);}
+    public SongAdapter(Context context, ArrayList<Song> aSongs) {
+        super(context, 0, aSongs);
+
+    }
 
 
     @Override
@@ -44,6 +49,12 @@ public class SongAdapter extends ArrayAdapter<Song>{
         final Song song = getItem(position);
         player = new MusicPlayer();
         handler = new DBHandler(getContext());
+        ArrayList<Song>favSongs = handler.getAllSongs();
+        favSongNames = new ArrayList<String>();
+        for(int i = 0; i<favSongs.size(); i++) {
+            favSongNames.add(favSongs.get(i).getTrackName());
+        }
+
         ViewHolder viewHolder;
         if(convertView == null) {
             viewHolder = new ViewHolder();
@@ -101,6 +112,19 @@ public class SongAdapter extends ArrayAdapter<Song>{
                 handler.addSong(sUrl, sName, sArtist, sAlbum);
             }
         });
+
+        boolean isFav = false;
+        for(int i = 0; i<favSongNames.size(); i++) {
+            if(song.getArtistName().equals(favSongNames.get(i))) {
+                isFav = true;
+                break;
+            }
+        }
+
+        if(isFav == true) {
+            ((ImageButton) convertView).setEnabled(false);
+            ((ImageButton) convertView).setBackgroundDrawable(replaceImg);
+        }
 
         if(song.getExplicit() == true) {
             viewHolder.explicit.setTextColor(Color.RED);
