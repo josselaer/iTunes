@@ -62,7 +62,7 @@ public class FavoritesListView extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_search:
-                //goToSearch();
+                goToSearch();
                 return true;
             case R.id.access_favorites:
                 accessFavList();
