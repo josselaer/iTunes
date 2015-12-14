@@ -27,7 +27,7 @@ public class FavoritesListView extends AppCompatActivity {
     private ImageButton play;
     private Toolbar toolbar;
     private ListView fSongs;
-    private SongAdapter songAdapter;
+    private FavoriteAdapter favAdapter;
 
     public static final String song_Detail = "event";
     private static final String TAG = "MusicResultsList";
@@ -44,8 +44,8 @@ public class FavoritesListView extends AppCompatActivity {
         allFavSongs = db.getAllSongs();
 
         fSongs = (ListView) findViewById(R.id.favoriteResults);
-        songAdapter = new SongAdapter(this, allFavSongs);
-        fSongs.setAdapter(songAdapter);
+        favAdapter = new FavoriteAdapter(this, allFavSongs);
+        fSongs.setAdapter(favAdapter);
 
         toolbar = (Toolbar) findViewById(R.id.landing_toolbar);
         this.setSupportActionBar(toolbar);

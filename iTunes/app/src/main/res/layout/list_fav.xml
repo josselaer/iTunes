@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <TextView
+        android:id="@+id/songName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="12dp"
+        android:layout_toRightOf="@+id/albumCover"
+        android:text="Title"
+        android:textSize="18dp"/>
+
+    <TextView
+        android:id="@+id/songArtist"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_toRightOf="@id/albumCover"
+        android:layout_marginTop="35dp"
+        android:text="Artist"
+        android:textSize="14dp"/>
+
+    <TextView
+        android:id="@+id/songAlbumName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Album"
+        android:layout_toRightOf="@+id/albumCover"
+        android:layout_marginLeft="20sp"
+        android:layout_marginTop="55dp"
+        android:textSize="14dp"
+        />
+
+    <TextView
+        android:id="@+id/explicit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="E"
+        android:layout_marginLeft="270dp"
+        android:layout_marginTop="35dp"
+        android:textSize="16dp"
+        />
+
+
+
+    <!--preview button, how to work it-->
+
+
+</RelativeLayout>
