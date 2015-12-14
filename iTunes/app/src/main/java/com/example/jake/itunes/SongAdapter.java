@@ -117,15 +117,15 @@ public class SongAdapter extends ArrayAdapter<Song>{
 
         boolean isFav = false;
         for(int i = 0; i<favSongNames.size(); i++) {
-            if(song.getArtistName().equals(favSongNames.get(i))) {
+            if(song.getTrackName().equals(favSongNames.get(i))) {
                 isFav = true;
                 break;
             }
         }
 
         if(isFav == true) {
-            ((ImageButton) convertView).setEnabled(false);
-            ((ImageButton) convertView).setBackgroundDrawable(replaceImg);
+            //((ImageButton) convertView).setEnabled(false);
+            viewHolder.favoriteBtn.setBackgroundDrawable(replaceImg);
         }
 
         if(song.getExplicit() == true) {
