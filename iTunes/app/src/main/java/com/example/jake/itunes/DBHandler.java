@@ -153,7 +153,7 @@ public class DBHandler extends SQLiteOpenHelper {
                 favSongs.add(song);
             } while (cursor.moveToNext());
         }
-        Log.d("getAllSongs()", song.getTrackName());
+        //Log.d("getAllSongs()", song.getTrackName());
         return favSongs;
     }
 }

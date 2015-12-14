@@ -32,7 +32,7 @@ public class ArtistResultsList extends AppCompatActivity {
         lArtists.setAdapter(artistAdapter);
 
         toolbar = (Toolbar) findViewById(R.id.landing_toolbar);
-        //this.setSupportActionBar(toolbar);
+        this.setSupportActionBar(toolbar);
 
 
     }

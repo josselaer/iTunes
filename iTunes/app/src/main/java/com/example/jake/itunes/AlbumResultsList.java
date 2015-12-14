@@ -32,7 +32,7 @@ public class AlbumResultsList extends AppCompatActivity{
         lAlbums.setAdapter(albumAdapter);
 
         toolbar = (Toolbar) findViewById(R.id.landing_toolbar);
-        //this.setSupportActionBar(toolbar);
+        this.setSupportActionBar(toolbar);
 
     }
 
